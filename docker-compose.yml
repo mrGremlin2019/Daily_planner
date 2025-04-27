@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=diary_db
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - MODE=dev
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:14
+    container_name: postgres_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=diary_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
