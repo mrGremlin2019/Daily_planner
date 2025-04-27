@@ -68,7 +68,7 @@ Daily Planner — это простое RESTful API для создания, ч�
     uvicorn src.main:app --reload
 ```
 
-Примерф схем Pydantic:
+Пример схем Pydantic:
 ```bash
     // DiaryEntryCreate
     {
